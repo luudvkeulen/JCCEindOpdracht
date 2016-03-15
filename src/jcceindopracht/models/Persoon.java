@@ -4,28 +4,26 @@ import java.util.Date;
 public class Persoon
 {
 	private String naam;
-	private Date geboorteDatum;
-	private String gender;
+	private Gezin gezin;
+
+	public Gezin getGezin()
+	{
+		return gezin;
+	}
 
 	public String getNaam()
 	{
 		return naam;
-	}
-
-	public Date getGeboorteDatum()
-	{
-		return geboorteDatum;
-	}
-
-	public String getGender()
-	{
-		return gender;
 	}	
 
-	public Persoon(String naam, Date geboorteDatum, String gender)
+	public Persoon(String naam, Gezin gezin)
 	{
 		this.naam = naam;
-		this.geboorteDatum = geboorteDatum;
-		this.gender = gender;
+		this.gezin = gezin;
+	}
+	
+	public Persoon(String naam)
+	{
+		this.naam = naam;
 	}
 }
