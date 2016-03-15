@@ -1,6 +1,8 @@
 package jcceindopdracht.db;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Database
 {
@@ -15,15 +17,26 @@ public class Database
 		try
 		{
 			connection = DriverManager.getConnection(url, user, password);
+			return connection;
 		} catch (SQLException e)
 		{
-			System.out.println(e.getMessage());
+			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getMessage());
+			return null;
 		}
-		return connection;
 	}
 	
-	public void closeConnection() throws SQLException
+	public boolean closeConnection()
 	{
-		connection.close();
+		try
+		{
+			connection.close();
+			return true;
+		} catch (SQLException e)
+		{
+			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getMessage());
+			return false;
+		}	
 	}
+	
+	
 }
