@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.Stage;
+import jcceindopdracht.db.Database;
 
 public class JCCEindOpdracht extends Application
 {
@@ -20,6 +21,9 @@ public class JCCEindOpdracht extends Application
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		Database db = new Database();
+		db.getConnection();
+		db.closeConnection();
 	}
 
 	/**
