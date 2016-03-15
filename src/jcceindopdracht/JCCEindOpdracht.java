@@ -21,9 +21,6 @@ public class JCCEindOpdracht extends Application
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		Database db = new Database();
-		db.getConnection();
-		db.closeConnection();
 	}
 
 	/**

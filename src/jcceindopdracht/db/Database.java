@@ -16,20 +16,20 @@ public class Database
 	
 	private Connection connection;
 	
-	public Connection getConnection()
+	public boolean open()
 	{
 		try
 		{
 			connection = DriverManager.getConnection(url, user, password);
-			return connection;
+			return true;
 		} catch (SQLException e)
 		{
 			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-			return null;
+			return false;
 		}
 	}
 	
-	public boolean closeConnection()
+	public boolean close()
 	{
 		try
 		{
@@ -44,6 +44,7 @@ public class Database
 
 	public int executeNonQuery(String query)
 	{
+		open();
 		try
 		{
 			Statement statement = connection.createStatement();	
@@ -52,11 +53,15 @@ public class Database
 		{
 			Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
 			return 0;
+		} finally
+		{
+			close();
 		}
 	}
 	
 	public ResultSet executeQuery(String query)
 	{
+		open();
 		try
 		{
 			Statement statement = connection.createStatement();		
@@ -65,6 +70,9 @@ public class Database
 		{
 			Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
 			return null;
+		} finally
+		{
+			close();
 		}
 	}
 }
