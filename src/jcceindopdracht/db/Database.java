@@ -18,61 +18,61 @@ public class Database
 	
 	public boolean open()
 	{
-		try
-		{
-			connection = DriverManager.getConnection(url, user, password);
-			return true;
-		} catch (SQLException e)
-		{
-			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-			return false;
-		}
+            try
+            {
+                    connection = DriverManager.getConnection(url, user, password);
+                    return true;
+            } catch (SQLException e)
+            {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+                    return false;
+            }
 	}
 	
 	public boolean close()
 	{
-		try
-		{
-			connection.close();
-			return true;
-		} catch (SQLException e)
-		{
-			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-			return false;
-		}	
+            try
+            {
+                    connection.close();
+                    return true;
+            } catch (SQLException e)
+            {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+                    return false;
+            }	
 	}
 
 	public int executeNonQuery(String query)
 	{
-		open();
-		try
-		{
-			Statement statement = connection.createStatement();	
-			return statement.executeUpdate(query);
-		} catch (SQLException ex)
-		{
-			Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-			return 0;
-		} finally
-		{
-			close();
-		}
+            open();
+            try
+            {
+                    Statement statement = connection.createStatement();	
+                    return statement.executeUpdate(query);
+            } catch (SQLException ex)
+            {
+                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                    return 0;
+            } finally
+            {
+                    close();
+            }
 	}
 	
 	public ResultSet executeQuery(String query)
 	{
-		open();
-		try
-		{
-			Statement statement = connection.createStatement();		
-			return statement.executeQuery(query);
-		} catch (SQLException ex)
-		{
-			Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-			return null;
-		} finally
-		{
-			close();
-		}
+            open();
+            try
+            {
+                    Statement statement = connection.createStatement();		
+                    return statement.executeQuery(query);
+            } catch (SQLException ex)
+            {
+                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                    return null;
+            } finally
+            {
+                    close();
+            }
 	}
 }
