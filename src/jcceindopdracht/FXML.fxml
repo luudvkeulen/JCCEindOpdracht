@@ -30,7 +30,7 @@
     <Label layoutX="300.0" layoutY="289.0" text="Informatie:" />
     <Label layoutX="300.0" layoutY="313.0" text="..." />
     <Button layoutX="300.0" layoutY="388.0" mnemonicParsing="false" prefWidth="210.0" text="Verstuur gegeven naar database" />
-    <Button fx:id="btnGegevensOphalen" layoutX="300.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleClickGegevens" prefWidth="210.0" text="Haal gegevens op van de database" />
+    <Button fx:id="btnGegevensOphalen" layoutX="300.0" layoutY="490.0" mnemonicParsing="false" prefWidth="210.0" text="Haal gegevens op van de database" />
     <Label id="lblTest" fx:id="lblGegevensVerstuurd" layoutX="300.0" layoutY="516.0" text="test" />
   </children>
 </AnchorPane>

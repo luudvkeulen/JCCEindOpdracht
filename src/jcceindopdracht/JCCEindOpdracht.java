@@ -23,9 +23,4 @@ public class JCCEindOpdracht extends Application
 	{
 		launch(args);
 	}
-<<<<<<< HEAD
-=======
-
-	
->>>>>>> origin/master
 }
