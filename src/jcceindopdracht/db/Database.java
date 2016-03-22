@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,12 +60,12 @@ public class Database
             }
 	}
 	
-	public ResultSet executeQuery(String query)
+	public ResultSet executeQuery(String query, List<String> parameters)
 	{
             open();
             try
             {
-                    Statement statement = connection.createStatement();		
+                    Statement statement = connection.createStatement();
                     return statement.executeQuery(query);
             } catch (SQLException ex)
             {

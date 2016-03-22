@@ -42,6 +42,8 @@ public class FXMLController implements Initializable
 	
 	private final Alert alert = new Alert(Alert.AlertType.WARNING, "Vul alle velden in");
 	private final Alert alert2 = new Alert(Alert.AlertType.WARNING, "Selecteer eerst een persoon");
+	private final Alert alert3 = new Alert(Alert.AlertType.INFORMATION, "Opgeslagen");
+	private final Alert alert4 = new Alert(Alert.AlertType.INFORMATION, "Opgehaald");
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
@@ -193,12 +195,16 @@ public class FXMLController implements Initializable
 	@FXML
 	private void sendToDatabase()
 	{
+		administratie.SendToDatabase();
+		alert3.show();
 		
 	}
 	
 	@FXML
 	private void getFromDatabase()
 	{
-		
+		administratie.FillFromDatabase();
+		UpdateList();
+		alert4.show();
 	}
 }
