@@ -10,11 +10,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.AccessibleAttribute;
 import javafx.scene.control.ListView;
+import jcceindopracht.models.Administratie;
 import jcceindopracht.models.Persoon;
 
 public class FXMLController implements Initializable
 {
+	private final Administratie administratie = new Administratie();
+	
 	@FXML
 	private TextField txtName;
 	
@@ -27,14 +31,15 @@ public class FXMLController implements Initializable
 	@FXML
 	private ListView<Persoon> listPersonen;
 	
-	private ObservableList<Persoon> personen;
+	private final ObservableList<Persoon> personen = FXCollections.observableArrayList(administratie.getAllPersonen());
 	
 	private final Alert alert = new Alert(Alert.AlertType.WARNING, "Vul alle velden in");
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		listPersonen = new ListView();
+		listPersonen.setItems(personen);
+		//UpdateList();
 	}
 
 	@FXML
@@ -45,6 +50,9 @@ public class FXMLController implements Initializable
                 alert.show();
                 return;
             }
+		administratie.voegPersonenToe(new Persoon("Pieter"));
+		//UpdateList();
+		
             System.out.println(txtName.getText());
 	}
 
@@ -59,5 +67,10 @@ public class FXMLController implements Initializable
 		
             System.out.println(txtParent1.getText());
             System.out.println(txtParent2.getText());
+	}
+	
+	private void UpdateList()
+	{
+		listPersonen.setItems(FXCollections.observableList(administratie.getAllPersonen()));
 	}
 }
