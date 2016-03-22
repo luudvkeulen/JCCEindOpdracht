@@ -1,5 +1,7 @@
 package jcceindopracht.models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +28,7 @@ public class Administratie
 	{
 		for (Persoon persoon : personen)
 		{
-			String sql = "INSERT INTO dbi318583.persoon (Naam) VALUES (" + "'" + persoon.getNaam() + "'" + ")";
+			String sql = "INSERT IGNORE INTO dbi318583.persoon (Naam) VALUES (" + "'" + persoon.getNaam() + "'" + ")";
 			database.executeNonQuery(sql);
 		}
 		
@@ -49,8 +51,10 @@ public class Administratie
 		}
 	}
 	
-	public void FillFromDatabase()
+	public void FillFromDatabase() throws SQLException
 	{
-		
+		String sql = "SELECT Naam,Ouder1,Ouder2 FROM dbi318583.persoon";
+		List<Persoon> result = database.executeQuery(sql);
+		personen.addAll(result);
 	}
 }

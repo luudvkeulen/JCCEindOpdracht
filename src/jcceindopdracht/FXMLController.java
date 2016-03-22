@@ -1,10 +1,10 @@
 package jcceindopdracht;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.util.Callback;
 import jcceindopracht.models.Administratie;
 import jcceindopracht.models.Persoon;
 
@@ -62,6 +61,7 @@ public class FXMLController implements Initializable
                 return;
             }
 		administratie.voegPersonenToe(new Persoon(txtName.getText()));
+		txtName.setText("");
 		UpdateList();
 	}
 
@@ -81,13 +81,15 @@ public class FXMLController implements Initializable
 		administratie.voegPersonenToe(ouder1);
 		administratie.voegPersonenToe(ouder2);
 		administratie.voegPersonenToe(persoon);
+		txtParent1.setText("");
+		txtParent2.setText("");
+		txtName.setText("");
 		UpdateList();
 	}
 	
 	@FXML
 	private void onIndexChanged(Persoon selectedPersoon)
 	{
-		System.out.println(selectedPersoon.getNaam());
 		List<Persoon> ouders = selectedPersoon.getOuders();
 		if(ouders.size() > 0)
 		{
@@ -176,7 +178,7 @@ public class FXMLController implements Initializable
 			return;
 		}
 		
-		if(txtParent2.getText().trim().length() == 0 || txtParent1.getText().trim().length() == 0 || txtName.getText().trim().length() == 0) 
+		if(txtParent2.getText().trim().length() == 0 || txtParent1.getText().trim().length() == 0) 
 		{
 			alert.show();
 			return;
@@ -189,6 +191,8 @@ public class FXMLController implements Initializable
 		persoon.setOuder2(ouder2);
 		administratie.voegPersonenToe(ouder1);
 		administratie.voegPersonenToe(ouder2);
+		txtParent1.setText("");
+		txtParent2.setText("");
 		UpdateList();
 	}
 	
@@ -201,7 +205,7 @@ public class FXMLController implements Initializable
 	}
 	
 	@FXML
-	private void getFromDatabase()
+	private void getFromDatabase() throws SQLException
 	{
 		administratie.FillFromDatabase();
 		UpdateList();
