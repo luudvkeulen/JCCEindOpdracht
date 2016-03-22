@@ -1,14 +1,13 @@
 package jcceindopracht.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 public class Persoon
 {
-    // Fields
-    private String naam;
-    private Persoon ouder1;
-private Persoon ouder2;	
+	// Fields
+	private String naam;
+	private Persoon ouder1;
+	private Persoon ouder2;	
 
 public void setOuder1(Persoon ouder1)
 {
@@ -69,5 +68,26 @@ public void setOuder2(Persoon ouder2)
 		}
 		
 		return personen;
+	}
+	
+	public void getVoorOuders(List<Persoon> results, boolean ouders)
+	{
+		if(this.ouder1 != null) 
+		{
+			if(!ouders)
+			{
+				results.add(this.ouder1);
+			}
+			ouder1.getVoorOuders(results, false);
+		}
+		
+		if(this.ouder2 != null)
+		{	
+			if(!ouders)
+			{
+				results.add(this.ouder2);
+			}
+			ouder2.getVoorOuders(results, false);
+		}
 	}
 }

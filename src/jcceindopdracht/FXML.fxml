@@ -8,29 +8,23 @@
 
 <AnchorPane id="AnchorPane" prefHeight="549.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="jcceindopdracht.FXMLController">
   <children>
-    <BorderPane layoutX="11.0" layoutY="277.0" prefHeight="242.0" prefWidth="251.0" style="" />
-    <ListView fx:id="listPersonen" layoutX="14.0" layoutY="66.0"  prefHeight="202.0" prefWidth="144.0" />
+    <ListView fx:id="listPersonen" layoutX="14.0" layoutY="66.0" prefHeight="202.0" prefWidth="144.0" />
     <Label layoutX="14.0" layoutY="14.0" text="Stamboom generator" />
     <Label layoutX="14.0" layoutY="50.0" text="Persoon" />
-    <ListView fx:id="listOuders" layoutX="192.0" layoutY="66.0" prefHeight="202.0" prefWidth="144.0" />
-    <ListView layoutX="380.0" layoutY="66.0" prefHeight="202.0" prefWidth="144.0" />
+    <ListView fx:id="listOuders" focusTraversable="false" layoutX="192.0" layoutY="66.0" mouseTransparent="true" prefHeight="202.0" prefWidth="144.0" />
+    <ListView fx:id="listVoorOuders" layoutX="380.0" layoutY="66.0" prefHeight="202.0" prefWidth="144.0" />
     <Label layoutX="192.0" layoutY="50.0" text="Ouders" />
     <Label layoutX="380.0" layoutY="50.0" text="Voorouders" />
     <TextField fx:id="txtName" layoutX="108.0" layoutY="289.0" prefWidth="144.0" />
     <TextField fx:id="txtParent1" layoutX="111.0" layoutY="352.0" prefWidth="144.0" />
     <TextField fx:id="txtParent2" layoutX="111.0" layoutY="386.0" prefWidth="144.0" />
-    <TextField fx:id="txtFamily" layoutX="111.0" layoutY="455.0" prefWidth="144.0" />
     <Label layoutX="14.0" layoutY="289.0" text="Naam persoon:" />
     <Label layoutX="17.0" layoutY="352.0" text="Naam ouder1:" />
     <Label layoutX="17.0" layoutY="386.0" text="Naam ouder2:" />
-    <Label layoutX="14.0" layoutY="455.0" text="Naam familie:" />
     <Button layoutX="108.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnAddPerson" prefWidth="144.0" text="Voeg persoon toe" />
     <Button layoutX="111.0" layoutY="418.0" mnemonicParsing="false" onAction="#btnAddPersonWithParents" prefWidth="144.0" text="Voeg persoon toe" />
-    <Button layoutX="111.0" layoutY="490.0" mnemonicParsing="false" prefWidth="144.0" text="Voeg Familie toe" />
-    <Label layoutX="300.0" layoutY="289.0" text="Informatie:" />
-    <Label layoutX="300.0" layoutY="313.0" text="..." />
-    <Button layoutX="300.0" layoutY="388.0" mnemonicParsing="false" prefWidth="210.0" text="Verstuur gegeven naar database" />
-    <Button fx:id="btnGegevensOphalen" layoutX="300.0" layoutY="490.0" mnemonicParsing="false" prefWidth="210.0" text="Haal gegevens op van de database" />
-    <Label id="lblTest" fx:id="lblGegevensVerstuurd" layoutX="300.0" layoutY="516.0" text="test" />
+    <Button layoutX="275.0" layoutY="289.0" mnemonicParsing="false" onAction="#sendToDatabase" prefWidth="273.0" text="Verstuur gegeven naar database" />
+    <Button fx:id="btnGegevensOphalen" layoutX="275.0" layoutY="327.0" mnemonicParsing="false" onAction="#getFromDatabase" prefWidth="273.0" text="Haal gegevens op van de database" />
+    <Button fx:id="btnAanpassen" contentDisplay="LEFT" layoutX="111.0" layoutY="455.0" mnemonicParsing="false" onAction="#btnAanpassen" prefWidth="144.0" text="Aanpassen" />
   </children>
 </AnchorPane>

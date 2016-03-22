@@ -1,6 +1,7 @@
 package jcceindopdracht;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -36,7 +37,11 @@ public class FXMLController implements Initializable
 	@FXML
 	private ListView<Persoon> listOuders;
 	
+	@FXML
+	private ListView<Persoon> listVoorOuders;
+	
 	private final Alert alert = new Alert(Alert.AlertType.WARNING, "Vul alle velden in");
+	private final Alert alert2 = new Alert(Alert.AlertType.WARNING, "Selecteer eerst een persoon");
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
@@ -81,12 +86,21 @@ public class FXMLController implements Initializable
 	private void onIndexChanged(Persoon selectedPersoon)
 	{
 		System.out.println(selectedPersoon.getNaam());
-		List<Persoon> personen = selectedPersoon.getOuders();
-		if(personen.size() > 0)
+		List<Persoon> ouders = selectedPersoon.getOuders();
+		if(ouders.size() > 0)
 		{
-			listOuders.setItems(FXCollections.observableList(personen));
+			listOuders.setItems(FXCollections.observableList(ouders));
 		} else {
 			listOuders.setItems(null);
+		}
+		
+		List<Persoon> results = new ArrayList<>();
+		selectedPersoon.getVoorOuders(results, true);
+		if(results.size() > 0)
+		{
+			listVoorOuders.setItems(FXCollections.observableList(results));
+		} else {
+			listVoorOuders.setItems(null);
 		}
 	}
 	
@@ -124,6 +138,20 @@ public class FXMLController implements Initializable
 			};
 			return cell;
 		});
+		
+		listVoorOuders.setCellFactory((ListView<Persoon> param) ->
+		{
+			final ListCell<Persoon> cell = new ListCell<Persoon>() {
+				@Override
+				public void updateItem(Persoon item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item != null) {
+						setText(item.getNaam());
+					}
+				}
+			};
+			return cell;
+		});
 	}
 	
 	private void AddSelectionEventHandler()
@@ -135,5 +163,42 @@ public class FXMLController implements Initializable
 				onIndexChanged(newValue);	
 			}			
 		});
+	}
+	
+	@FXML
+	private void btnAanpassen(ActionEvent event)
+	{
+		if(listPersonen.getSelectionModel().selectedItemProperty().get() == null) 
+		{
+			alert2.show();
+			return;
+		}
+		
+		if(txtParent2.getText().trim().length() == 0 || txtParent1.getText().trim().length() == 0 || txtName.getText().trim().length() == 0) 
+		{
+			alert.show();
+			return;
+		}
+		
+		Persoon persoon = listPersonen.getSelectionModel().getSelectedItem();
+		Persoon ouder1 = new Persoon(txtParent1.getText());
+		Persoon ouder2 = new Persoon(txtParent2.getText());
+		persoon.setOuder1(ouder1);
+		persoon.setOuder2(ouder2);
+		administratie.voegPersonenToe(ouder1);
+		administratie.voegPersonenToe(ouder2);
+		UpdateList();
+	}
+	
+	@FXML
+	private void sendToDatabase()
+	{
+		
+	}
+	
+	@FXML
+	private void getFromDatabase()
+	{
+		
 	}
 }
