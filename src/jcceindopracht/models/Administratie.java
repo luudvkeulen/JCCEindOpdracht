@@ -55,6 +55,7 @@ public class Administratie
 	{
 		String sql = "SELECT Naam,Ouder1,Ouder2 FROM dbi318583.persoon";
 		List<Persoon> result = database.executeQuery(sql);
+		personen.clear();
 		personen.addAll(result);
 	}
 }
